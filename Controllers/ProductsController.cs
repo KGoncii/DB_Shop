@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using DB_Shop.Data;
 using DB_Shop.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DB_Shop.Controllers
 {
@@ -13,7 +14,6 @@ namespace DB_Shop.Controllers
         {
             _context = context;
         }
-
         // GET: Products
         public async Task<IActionResult> Index()
         {
@@ -39,7 +39,7 @@ namespace DB_Shop.Controllers
 
             return View(product);
         }
-
+        [Authorize]
         // GET: Products/Create
         public IActionResult Create()
         {
@@ -49,6 +49,7 @@ namespace DB_Shop.Controllers
         // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProductId,Name,Description,Price,StockQuantity,Category,CreatedAt")] Product product)
@@ -61,7 +62,7 @@ namespace DB_Shop.Controllers
             }
             return View(product);
         }
-
+        [Authorize]
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -81,6 +82,7 @@ namespace DB_Shop.Controllers
         // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,Description,Price,StockQuantity,Category,CreatedAt")] Product product)
@@ -112,7 +114,7 @@ namespace DB_Shop.Controllers
             }
             return View(product);
         }
-
+        [Authorize]
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -130,7 +132,7 @@ namespace DB_Shop.Controllers
 
             return View(product);
         }
-
+        [Authorize]
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

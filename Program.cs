@@ -18,8 +18,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-var cultureInfo = new System.Globalization.CultureInfo("en-US"); // lub "pl-PL", jeœli chcesz ustawiæ przecinek jako separator dziesiêtny
-cultureInfo.NumberFormat.CurrencyDecimalSeparator = "."; // lub przecinek, jeœli chcesz
+var cultureInfo = new System.Globalization.CultureInfo("en-US"); // lub "pl-PL", jeï¿½li chcesz ustawiï¿½ przecinek jako separator dziesiï¿½tny
+cultureInfo.NumberFormat.CurrencyDecimalSeparator = "."; // lub przecinek, jeï¿½li chcesz
 
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
 CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
