@@ -13,48 +13,34 @@
 <div class="product-container">
     @foreach (var item in Model)
     {
-        <div class="product-card">
-            <div class="StockQuantity">@Html.DisplayFor(modelItem => item.StockQuantity)</div>
-            <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
-            <p>@Html.DisplayFor(modelItem => item.Description)</p>
-            <p>Cena: @Html.DisplayFor(modelItem => item.Price) zł</p>
-
-            <div class="quantity-control">
-                <button class="btn-quantity" onclick="changeQuantity(-1, @item.ProductId, @item.StockQuantity)">-</button>
-                <input type="number" class="quantity-input" value="0" min="1" max="@item.StockQuantity" id="quantity-@item.ProductId" readonly />
-                <button class="btn-quantity" onclick="changeQuantity(1, @item.ProductId, @item.StockQuantity)">+</button>
+            <div class="product-card">
+            <a asp-action="Details" asp-route-id="@item.ProductId" class="product-card-link">
+                <div class="upper-card">
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small/no-image-available-icon-vector.jpg" alt="Product IMG">
+                    <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
+                    <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                </div>
+            </a>
+                <div class="lower-card">
+                    <a asp-action="Details" asp-route-id="@item.ProductId" class="product-card-link">
+                    <p>@Html.DisplayFor(modelItem => item.StockQuantity)</p>
+                    <h3>@Html.DisplayFor(modelItem => item.Price) zł</h3>
+            </a>
+                    <div class="button-group">
+                        <button class="btn-add-to-cart" onclick="addToCart(@item.ProductId, @item.StockQuantity)">Add to Cart</button>
+                    </div>
+                </div>
             </div>
-
-            <div class="button-group">
-                <a asp-action="Details" asp-route-id="@item.ProductId" class="btn-details">Details</a>
-                <button class="btn-add-to-cart" onclick="addToCart(@item.ProductId, @item.StockQuantity)">Add to Cart</button>
-            </div>
-        </div>
     }
 </div>
-
-<script>
-    // Funkcja do zmiany ilości produktu
-    function changeQuantity(change, productId, stockQuantity) {
-        const input = document.getElementById(`quantity-${productId}`);
-        let currentValue = parseInt(input.value);
-
-        if (change === -1 && currentValue > 1) {
-            input.value = currentValue - 1;
-        } else if (change === 1 && currentValue < stockQuantity) {
-            input.value = currentValue + 1;
-        }
+<style>
+    a {
+        text-decoration: none;
+        color: inherit;
     }
 
-    // Funkcja do dodania produktu do koszyka
-    function addToCart(productId, stockQuantity) {
-        const quantity = parseInt(document.getElementById(`quantity-${productId}`).value);
-
-        if (quantity > stockQuantity) {
-            alert(`Nie możesz dodać więcej niż ${stockQuantity} sztuk do koszyka.`);
-        } else {
-            // Dodaj logikę do dodania produktu do koszyka
-            alert(`Dodano ${quantity} sztuk produktu o ID: ${productId} do koszyka.`);
+        a:hover {
+            text-decoration: none;
+            color: inherit;
         }
-    }
-</script>
+</style>
