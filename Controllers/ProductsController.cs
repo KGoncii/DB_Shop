@@ -21,7 +21,11 @@ namespace DB_Shop.Controllers
                           View(await _context.Product.ToListAsync()) :
                           Problem("Entity set 'DB_ShopContext.Product'  is null.");
         }
-
+        // Post: Products/ShowSearchResults
+        public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
+        {
+            return View("Index", await _context.Product.Where(p => p.Name.Contains(SearchPhrase) || p.Description.Contains(SearchPhrase) || p.Category.Contains(SearchPhrase)).ToListAsync());
+        }
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
