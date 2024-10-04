@@ -24,7 +24,14 @@ namespace DB_Shop.Controllers
         // Post: Products/ShowSearchResults
         public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
         {
-            return View("Index", await _context.Product.Where(p => p.Name.Contains(SearchPhrase) || p.Description.Contains(SearchPhrase) || p.Category.Contains(SearchPhrase)).ToListAsync());
+            if(SearchPhrase != null)
+            {
+                return View("Index", await _context.Product.Where(p => p.Name.Contains(SearchPhrase) || p.Description.Contains(SearchPhrase) || p.Category.Contains(SearchPhrase)).ToListAsync());
+            }
+            else
+            {
+                return View("Index", await _context.Product.ToListAsync());
+            }
         }
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
