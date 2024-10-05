@@ -13,7 +13,7 @@
 <div class="product-container">
     @foreach (var item in Model)
     {
-            <div class="product-card">
+        <div class="product-card">
             <a asp-action="Details" asp-route-id="@item.ProductId" class="product-card-link">
                 <div class="upper-card">
                     <img src="https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small/no-image-available-icon-vector.jpg" alt="Product IMG">
@@ -21,18 +21,19 @@
                     <p>@Html.DisplayFor(modelItem => item.Description)</p>
                 </div>
             </a>
-                <div class="lower-card">
-                    <a asp-action="Details" asp-route-id="@item.ProductId" class="product-card-link">
-                    <p>@Html.DisplayFor(modelItem => item.StockQuantity)</p>
+            <div class="lower-card">
+                <a asp-action="Details" asp-route-id="@item.ProductId" class="product-card-link">
+                    <p class="quantity">@Html.DisplayFor(modelItem => item.StockQuantity)</p>
                     <h3>@Html.DisplayFor(modelItem => item.Price) zł</h3>
-            </a>
-                    <div class="button-group">
-                        <button class="btn-add-to-cart" onclick="addToCart(@item.ProductId, @item.StockQuantity)">Add to Cart</button>
-                    </div>
+                </a>
+                <div class="button-group">
+                    <button class="btn-add-to-cart" onclick="addToCart(@item.ProductId, @item.StockQuantity)">Add to Cart</button>
                 </div>
             </div>
+        </div>
     }
 </div>
+
 <style>
     a {
         text-decoration: none;
@@ -44,3 +45,19 @@
             color: inherit;
         }
 </style>
+<script>
+    window.onload = function () {
+        var quantities = document.getElementsByClassName("quantity");
+        for (var i = 0; i < quantities.length; i++) {
+            var quantityValue = parseInt(quantities[i].innerText, 10);
+            if (quantityValue === 0) {
+                var productCard = quantities[i].closest(".product-card");
+                productCard.querySelector(".btn-add-to-cart").style.visibility = "hidden"; // Hide the button
+                productCard.style.opacity = "50%"; // Reduce opacity for out-of-stock products
+                productCard.classList.add("no-hover"); // Disable hover effects
+            }
+        }
+    }
+</script>
+
+

@@ -50,6 +50,11 @@ body {
     transform: scale(1.2);
 }
 
+.no-hover .upper-card img {
+    transform: scale(1.2);
+}
+
+
 .upper-card p, .upper-card h3 {
     margin: 10px;
 }
