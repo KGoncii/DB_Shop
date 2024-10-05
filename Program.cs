@@ -5,29 +5,38 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<DB_ShopContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DB_ShopContext") ?? throw new InvalidOperationException("Connection string 'DB_ShopContext' not found.")));
 
-// Add services to the container.
+// Konfiguracja połączenia z bazą danych dla aplikacji (DB_ShopContext)
+builder.Services.AddDbContext<DB_ShopContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DB_ShopContext")
+    ?? throw new InvalidOperationException("Connection string 'DB_ShopContext' not found.")));
+
+// Konfiguracja połączenia z bazą danych dla tożsamości (Identity)
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+// Dodanie wymogu unikalności adresu e-mail podczas rejestracji
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = true;
+    options.User.RequireUniqueEmail = true;
+})
+.AddEntityFrameworkStores<ApplicationDbContext>();
+
+// Dodanie kontrolerów z widokami
 builder.Services.AddControllersWithViews();
 
-var cultureInfo = new System.Globalization.CultureInfo("en-US"); // lub "pl-PL", je�li chcesz ustawi� przecinek jako separator dziesi�tny
-cultureInfo.NumberFormat.CurrencyDecimalSeparator = "."; // lub przecinek, je�li chcesz
+var cultureInfo = new System.Globalization.CultureInfo("en-US");
+cultureInfo.NumberFormat.CurrencyDecimalSeparator = ".";
 
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
 CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Konfiguracja potoku HTTP
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
@@ -35,7 +44,6 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

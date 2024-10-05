@@ -72,7 +72,7 @@ namespace DB_Shop.Areas.Identity.Pages.Account
         {
             [Required]
             [Display(Name = "UserName")]
-            public string UserName { get; set; } // Usunięto atrybut EmailAddress
+            public string UserName { get; set; }
 
             [Required]
             [EmailAddress]
