@@ -5,7 +5,7 @@
 }
 
 <h1>Details</h1>
-
+<input type="hidden" value="@Model.ProductId"/>
 <div>
     <h4>Product</h4>
     <hr />
@@ -47,8 +47,10 @@
             @Html.DisplayFor(model => model.CreatedAt)
         </dd>
     </dl>
+    
 </div>
 <div>
+    <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@Model?.ProductId" class=" btn btn-primary">AddToCart</a> |
     <a asp-action="Edit" asp-route-id="@Model?.ProductId">Edit</a> |
     <a asp-action="Delete" asp-route-id="@Model?.ProductId">Delete</a> |
     <a asp-action="Index">Back to List</a>

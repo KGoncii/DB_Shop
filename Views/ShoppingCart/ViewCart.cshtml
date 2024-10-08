@@ -1,0 +1,24 @@
+﻿@model ShoppingCartViewModel
+<h1>Shopping Cart</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.CartItems)
+        {
+            <tr>
+                <th>@item.Product.Name</th>
+                <th>@item.Product.Description</th>
+                <th>@((item.Product.Price * item.Quantity).ToString("C"))</th>
+            </tr>
+        }
+    </tbody>
+    <tr>
+        <td>@Model.TotalPrice?.ToString("C")</td>
+    </tr>
+</table>

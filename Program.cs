@@ -34,8 +34,8 @@ cultureInfo.NumberFormat.CurrencyDecimalSeparator = ".";
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
 CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
+builder.Services.AddSession();
 var app = builder.Build();
-
 // Konfiguracja potoku HTTP
 if (app.Environment.IsDevelopment())
 {
@@ -54,7 +54,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Products}/{action=Index}/{id?}");
