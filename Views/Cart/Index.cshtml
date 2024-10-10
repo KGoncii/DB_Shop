@@ -1,0 +1,56 @@
+﻿@model IEnumerable<DB_Shop.Models.Cart>
+
+@{
+    ViewData["Title"] = "Koszyk";
+}
+
+<h1>Koszyk</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Product.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Product.Description) 
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Quantity) 
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Product.Price) 
+            </th>
+            <th>
+                Cena całkowita 
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Description) 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity) 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Price) PLN
+                </td>
+                <td>
+                    @((item.Quantity * item.Product.Price)) PLN 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

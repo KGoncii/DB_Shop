@@ -27,7 +27,7 @@
                     <h3>@Html.DisplayFor(modelItem => item.Price) zł</h3>
                 </a>
                 <div class="button-group">
-                    <button class="btn-add-to-cart" onclick="addToCart(@item.ProductId, @item.StockQuantity)">Add to Cart</button>
+                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item?.ProductId" class=" btn btn-primary">AddToCart</a>
                 </div>
             </div>
         </div>

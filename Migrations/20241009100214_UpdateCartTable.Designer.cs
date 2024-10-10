@@ -4,6 +4,7 @@ using DB_Shop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DB_Shop.Migrations
 {
     [DbContext(typeof(DB_ShopContext))]
-    partial class DB_ShopContextModelSnapshot : ModelSnapshot
+    [Migration("20241009100214_UpdateCartTable")]
+    partial class UpdateCartTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,31 +23,6 @@ namespace DB_Shop.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("DB_Shop.Models.Cart", b =>
-                {
-                    b.Property<int>("CartId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartId"), 1L, 1);
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CartId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Cart");
-                });
 
             modelBuilder.Entity("DB_Shop.Models.Product", b =>
                 {
@@ -79,17 +56,6 @@ namespace DB_Shop.Migrations
                     b.HasKey("ProductId");
 
                     b.ToTable("Product");
-                });
-
-            modelBuilder.Entity("DB_Shop.Models.Cart", b =>
-                {
-                    b.HasOne("DB_Shop.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }
