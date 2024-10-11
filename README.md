@@ -41,15 +41,17 @@ cd sklep-internetowy</code></pre>
   "ConnectionStrings": {
     "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=SklepDB;Trusted_Connection=True;"
   }
-}</code></pre>
+}</code>
+</pre>
+    <li>
         <p>Wykonaj migracje, aby utworzyć bazę danych:</p>
         <pre><code>dotnet ef database update</code></pre>
     </li>
-
-    <li><strong>Uruchomienie aplikacji:</strong>
+<li><strong>Uruchomienie aplikacji:</strong>
         <pre><code>dotnet run</code></pre>
         <p>Otwórz przeglądarkę i przejdź pod adres <code>https://localhost:5001</code>, aby korzystać z aplikacji.</p>
     </li>
+    
 </ol>
 
 <h2>Struktura projektu</h2>
