@@ -50,6 +50,9 @@
                 <td>
                     @((item.Quantity * item.Product.Price)) PLN 
                 </td>
+                <td>
+                    <a asp-action="RemoveFromCart" asp-route-id="@item.CartId">Delete</a>
+                </td>
             </tr>
         }
     </tbody>

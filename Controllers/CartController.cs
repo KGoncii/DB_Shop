@@ -67,7 +67,20 @@ namespace DB_Shop.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Index");
+        }
 
+        public IActionResult RemoveFromCart(int id)
+        {
+            var cartItemToRemove = _context.Cart.Find(id);
+            if (cartItemToRemove == null)
+            {
+                return NotFound();
+            }
+
+            _context.Cart.Remove(cartItemToRemove);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
     }

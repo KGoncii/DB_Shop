@@ -29,7 +29,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
                         </li>
                         <li class="nav-item">
-                            <form asp-action="ShowSearchResults">
+                            <form asp-controller="Products" asp-action="ShowSearchResults">
                                 <div class="form-group">
                                     <label for="SearchPhrase"></label>
                                     <input name="SearchPhrase" />
