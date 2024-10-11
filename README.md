@@ -66,5 +66,5 @@ cd sklep-internetowy</code></pre>
 
 <h2>Autorzy</h2>
 <ul>
-    <li><strong>Imię Nazwisko</strong> – student AGH, kierunek <strong>[Twoja specjalizacja]</strong></li>
+    <li><strong>Kacper Goncerz</strong> – student AGH,<strong>Inżynieria Obliczeniowa</strong> 2023</li>
 </ul>
