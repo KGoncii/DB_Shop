@@ -1,7 +1,7 @@
 <h1>Aplikacja Sklepu Internetowego</h1>
 
 <h2>Opis projektu</h2>
-<p>Ten projekt jest aplikacją sklepu internetowego napisaną w ASP.NET Core z wykorzystaniem Entity Framework oraz bazy danych SQL. Aplikacja została stworzona w ramach zajęć na <strong>Akademii Górniczo-Hutniczej</strong> na przedmiot <strong>"Bazy Danych"</strong>.</p>
+<p>Ten projekt jest aplikacją sklepu internetowego napisaną w ASP.NET Core z wykorzystaniem Entity Framework oraz bazy danych SQL. Aplikacja została stworzona w ramach zajęć na <strong>Akademii Górniczo-Hutniczej</strong> na przedmiot <strong>Bazy Danych</strong>.</p>
 
 <h2>Funkcjonalności</h2>
 <ul>
@@ -31,12 +31,12 @@
 <h2>Instalacja i uruchomienie</h2>
 <ol>
     <li><strong>Sklonuj repozytorium:</strong>
-        <pre><code>git clone https://github.com/username/sklep-internetowy.git
-cd sklep-internetowy</code></pre>
+        <pre><code>git clone https://github.com/KGoncii/DB_Shop.git
+cd DB_Shop</code></pre>
     </li>
 
-    <li><strong>Przygotowanie bazy danych:</strong>
-        <p>Skonfiguruj połączenie z bazą danych SQL w pliku <code>appsettings.json</code>:</p>
+<li><strong>Przygotowanie bazy danych:</strong>
+    <p>Skonfiguruj połączenie z bazą danych SQL w pliku <code>appsettings.json</code>:</p>
         <pre><code>{
   "ConnectionStrings": {
     "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=SklepDB;Trusted_Connection=True;"
@@ -66,7 +66,7 @@ cd sklep-internetowy</code></pre>
 <p>Aby dodać nową migrację, użyj polecenia:</p>
 <pre><code>dotnet ef migrations add NazwaMigracji</code></pre>
 
-<h2>Autorzy</h2>
+<h2>Autor</h2>
 <ul>
-    <li><strong>Kacper Goncerz</strong> – student AGH,<strong>Inżynieria Obliczeniowa</strong> 2023</li>
+    <li><strong>Kacper Goncerz</strong> – student AGH, <strong>Inżynieria Obliczeniowa</strong></li>
 </ul>
