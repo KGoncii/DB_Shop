@@ -52,9 +52,9 @@
             var quantityValue = parseInt(quantities[i].innerText, 10);
             if (quantityValue === 0) {
                 var productCard = quantities[i].closest(".product-card");
-                productCard.querySelector(".btn-add-to-cart").style.visibility = "hidden"; // Hide the button
-                productCard.style.opacity = "50%"; // Reduce opacity for out-of-stock products
-                productCard.classList.add("no-hover"); // Disable hover effects
+                productCard.querySelector(".btn.btn-primary").style.visibility = "hidden";
+                productCard.style.opacity = "50%";
+                productCard.classList.add("no-hover");
             }
         }
     }

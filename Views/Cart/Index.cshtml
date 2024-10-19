@@ -42,7 +42,9 @@
                     @Html.DisplayFor(modelItem => item.Product.Description) 
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Quantity) 
+                    <a asp-action="DecreaseQuantity" asp-route-id="@item.CartId">-</a>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                    <a asp-action="IncreaseQuantity" asp-route-id="@item.CartId">+</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Product.Price) PLN
@@ -55,5 +57,9 @@
                 </td>
             </tr>
         }
+        <tr>
+            <td>Łączna suma: @ViewBag.TotalPrice PLN</td>
+        </tr>
     </tbody>
 </table>
+<a asp-action="Order">Zamów</a>

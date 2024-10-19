@@ -2,12 +2,12 @@
 {
     public class Product
     {
-        public int ProductId { get; set; } // Klucz główny
-        public string Name { get; set; } // Nazwa produktu
-        public string Description { get; set; } // Opis produktu
-        public decimal Price { get; set; } // Cena
-        public int StockQuantity { get; set; } // Ilość na stanie
-        public string Category { get; set; } // Kategoria produktu
+        public int ProductId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
+        public int StockQuantity { get; set; }
+        public string Category { get; set; }
         public DateTime CreatedAt { get; set; }
 
         public Product()
