@@ -105,7 +105,7 @@ namespace DB_Shop.Controllers
             return RedirectToAction("Index");
         }
 
-
+        [Authorize]
         public IActionResult RemoveFromCart(int id)
         {
             var cartItemToRemove = _context.Cart.Find(id);
@@ -118,8 +118,9 @@ namespace DB_Shop.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Index");
-        } 
+        }
 
+        [Authorize]
         public IActionResult Order()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -132,8 +133,48 @@ namespace DB_Shop.Controllers
                 .Where(c => c.UserId == userId)
                 .Include(c => c.Product)
                 .ToList();
-            
-            return View(cartItems);
+
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    foreach (var item in cartItems)
+                    {
+                        var product = _context.Product
+                            .SingleOrDefault(p => p.ProductId == item.ProductId);
+
+                        if (product == null || product.StockQuantity == 0)
+                        {
+                            _context.Cart.Remove(item);
+                            _context.SaveChanges();
+
+                            transaction.Rollback();
+
+                            return RedirectToAction("Index", "Cart");
+                        }
+
+                        product.StockQuantity -= item.Quantity;
+                        product.NumberSold += item.Quantity;
+                        product.LastSold = DateTime.Now;
+
+                        _context.SaveChanges();
+                    }
+
+                    _context.Cart.RemoveRange(cartItems);
+                    _context.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    return RedirectToAction("Index", "Cart");
+                }
+            }
+
+            return RedirectToAction("Index", "Products");
         }
+
+
     }
 }

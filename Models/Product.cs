@@ -8,8 +8,9 @@
         public decimal Price { get; set; }
         public int StockQuantity { get; set; }
         public string Category { get; set; }
+        public int NumberSold { get; set; }
+        public DateTime LastSold { get; set; }
         public DateTime CreatedAt { get; set; }
-
         public Product()
         {
             CreatedAt = DateTime.Now;
