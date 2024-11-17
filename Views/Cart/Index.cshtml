@@ -6,10 +6,15 @@
 
 <h1>Koszyk</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-
+@if (!Model.Any())
+{
+    <div class="alert alert-warning">
+        <p>Twój koszyk jest pusty. Dodaj produkty do koszyka, aby je zobaczyć tutaj.</p>
+        <a asp-action="Index" asp-controller="Products" class="btn btn-primary">Przejdź do sklepu</a>
+    </div>
+}
+else
+{
 <table class="table">
     <thead>
         <tr>
@@ -63,3 +68,4 @@
     </tbody>
 </table>
 <a asp-action="Order">Zamów</a>
+}

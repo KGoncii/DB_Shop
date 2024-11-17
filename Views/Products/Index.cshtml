@@ -4,13 +4,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 
 <div class="product-container">
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning">
+            <p>Jeszcze nie mamy w ofercie takiego produktu ale pracujemy nad tym :)</p>
+        </div>
+    }
+    else
+    {
     @foreach (var item in Model)
     {
         <div class="product-card">
@@ -31,6 +37,7 @@
                 </div>
             </div>
         </div>
+    }
     }
 </div>
 
